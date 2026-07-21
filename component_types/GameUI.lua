@@ -92,18 +92,18 @@ GameUI = {
 
     DrawIntro = function(self, director)
         self:DrawDimmer(138)
-        Shared.DrawRect(275, 54, 630, 430, Shared.palette.ink, 242, 1200)
-        Shared.DrawCenteredText("MEET ALEX", 590, 91, 30,
+        Shared.DrawRect(165, 54, 630, 430, Shared.palette.ink, 242, 1200)
+        Shared.DrawCenteredText("MEET ALEX", 480, 91, 30,
                                 Shared.palette.cream)
         Shared.DrawWrappedText(
             "Across eleven years, Alex will face three ordinary challenges. Your choices affect task progress, confidence, independence, and stress.",
-            348, 148, 19, Shared.palette.paper, 57, 28)
+            238, 148, 19, Shared.palette.paper, 57, 28)
         Shared.DrawWrappedText(
             "There is no single action that is always correct. Observe what Alex can do now, offer the next useful step, and notice when it is time to step back.",
-            348, 245, 19, Shared.palette.paper, 57, 28)
-        Shared.DrawText("Your starting answer: " .. director.belief, 348, 346,
+            238, 245, 19, Shared.palette.paper, 57, 28)
+        Shared.DrawText("Your starting answer: " .. director.belief, 238, 346,
                         17, Shared.palette.amber)
-        local hover = self:DrawButton(462, 398, 260, 58, "WATCH AND RESPOND", "ENTER")
+        local hover = self:DrawButton(350, 398, 260, 58, "WATCH AND RESPOND", "ENTER")
         if (hover and Input.GetMouseButtonDown(1)) or
             Input.GetKeyDown("enter") then
             director:BeginStory()
@@ -113,19 +113,19 @@ GameUI = {
     DrawChapterIntro = function(self, director)
         self:DrawDimmer(120)
         local chapter = director:GetChapter()
-        Shared.DrawRect(290, 72, 620, 390, Shared.palette.ink, 240, 1200)
-        Shared.DrawCenteredText(chapter.title, 600, 112, 26,
+        Shared.DrawRect(170, 72, 620, 390, Shared.palette.ink, 240, 1200)
+        Shared.DrawCenteredText(chapter.title, 480, 112, 26,
                                 Shared.palette.cream)
-        Shared.DrawCenteredText(chapter.concept, 600, 156, 17,
+        Shared.DrawCenteredText(chapter.concept, 480, 156, 17,
                                 Shared.palette.amber)
-        Shared.DrawWrappedText(chapter.opening, 344, 211, 21,
+        Shared.DrawWrappedText(chapter.opening, 224, 211, 21,
                                Shared.palette.paper, 52, 31)
         if director.chapter_index > 1 then
-            Shared.DrawText("Alex says:", 344, 289, 16, Shared.palette.sage_light)
+            Shared.DrawText("Alex says:", 224, 289, 16, Shared.palette.sage_light)
             Shared.DrawWrappedText('"' .. director:GetEchoLine() .. '"',
-                                   344, 316, 21, Shared.palette.cream, 48, 30)
+                                   224, 316, 21, Shared.palette.cream, 48, 30)
         end
-        local hover = self:DrawButton(478, 385, 245, 55, "ENTER THIS MOMENT", "ENTER")
+        local hover = self:DrawButton(357, 385, 245, 55, "ENTER THIS MOMENT", "ENTER")
         if (hover and Input.GetMouseButtonDown(1)) or
             Input.GetKeyDown("enter") then
             director:BeginChapter()
@@ -211,13 +211,13 @@ GameUI = {
     DrawChapterSummary = function(self, director)
         self:DrawDimmer(130)
         local chapter = director:GetChapter()
-        Shared.DrawRect(268, 61, 650, 420, Shared.palette.ink, 245, 1300)
-        Shared.DrawCenteredText("CHAPTER COMPLETE", 593, 96, 25,
+        Shared.DrawRect(155, 61, 650, 420, Shared.palette.ink, 245, 1300)
+        Shared.DrawCenteredText("CHAPTER COMPLETE", 480, 96, 25,
                                 Shared.palette.cream)
-        Shared.DrawText(chapter.concept, 331, 145, 18, Shared.palette.amber)
-        Shared.DrawWrappedText(chapter.concept_text, 331, 184, 19,
+        Shared.DrawText(chapter.concept, 218, 145, 18, Shared.palette.amber)
+        Shared.DrawWrappedText(chapter.concept_text, 218, 184, 19,
                                Shared.palette.paper, 57, 27)
-        Shared.DrawText("Support pattern so far", 331, 307, 15,
+        Shared.DrawText("Support pattern so far", 218, 307, 15,
                         Shared.palette.sage_light)
         local total = math.max(1, director.patterns.responsive +
                                   director.patterns.fixer +
@@ -229,14 +229,14 @@ GameUI = {
         }
         for index = 1, 3 do
             local y = 336 + (index - 1) * 29
-            Shared.DrawText(labels[index][1], 331, y, 13, Shared.palette.paper)
-            Shared.DrawRect(443, y + 3, 250, 10, Shared.palette.shadow, 240, 1400)
-            Shared.DrawRect(443, y + 3, 250 * labels[index][2] / total, 10,
+            Shared.DrawText(labels[index][1], 218, y, 13, Shared.palette.paper)
+            Shared.DrawRect(330, y + 3, 250, 10, Shared.palette.shadow, 240, 1400)
+            Shared.DrawRect(330, y + 3, 250 * labels[index][2] / total, 10,
                             labels[index][3], 255, 1500)
         end
         local label = director.chapter_index < #Shared.chapters and
                           "MOVE FORWARD IN TIME" or "SEE THE PATTERN"
-        local hover = self:DrawButton(684, 404, 212, 55, label, "ENTER")
+        local hover = self:DrawButton(374, 416, 212, 55, label, "ENTER")
         if (hover and Input.GetMouseButtonDown(1)) or
             Input.GetKeyDown("enter") then
             director:ContinueAfterSummary()
@@ -245,7 +245,7 @@ GameUI = {
 
     DrawEnding = function(self, director)
         self:DrawDimmer(145)
-        Shared.DrawRect(235, 37, 690, 468, Shared.palette.ink, 246, 1300)
+        Shared.DrawRect(135, 37, 690, 468, Shared.palette.ink, 246, 1300)
         local endings = {
             fixer = {
                 title = "THE FIXER",
@@ -261,24 +261,24 @@ GameUI = {
             }
         }
         local ending = endings[director.ending_key]
-        Shared.DrawCenteredText("YOUR SUPPORT PATTERN", 580, 69, 16,
+        Shared.DrawCenteredText("YOUR SUPPORT PATTERN", 480, 69, 16,
                                 Shared.palette.amber)
-        Shared.DrawCenteredText(ending.title, 580, 105, 31,
+        Shared.DrawCenteredText(ending.title, 480, 105, 31,
                                 Shared.palette.cream)
-        Shared.DrawWrappedText(ending.text, 300, 159, 18,
+        Shared.DrawWrappedText(ending.text, 200, 159, 18,
                                Shared.palette.paper, 62, 26)
-        Shared.DrawRect(288, 265, 584, 107, Shared.palette.sage, 215, 1450)
+        Shared.DrawRect(188, 265, 584, 107, Shared.palette.sage, 215, 1450)
         Shared.DrawWrappedText(
             "Children do not develop best with maximum help or zero help. They develop through responsive support that changes with ability, relationship, and context.",
-            313, 288, 18, Shared.palette.cream, 59, 25)
+            213, 288, 18, Shared.palette.cream, 59, 25)
         Shared.DrawText("A few moments do not determine a life. Development remains plastic.",
-                        287, 390, 14, Shared.palette.sage_light)
+                        187, 390, 14, Shared.palette.sage_light)
 
-        local concept_hover = self:DrawButton(287, 426, 250, 55,
+        local concept_hover = self:DrawButton(187, 426, 250, 55,
                                                "VIEW CONCEPTS", "C")
-        local replay_hover = self:DrawButton(557, 426, 155, 55,
+        local replay_hover = self:DrawButton(457, 426, 155, 55,
                                               "REPLAY", "R")
-        local quit_hover = self:DrawButton(732, 426, 140, 55,
+        local quit_hover = self:DrawButton(632, 426, 140, 55,
                                             "QUIT", "Q")
         if (concept_hover and Input.GetMouseButtonDown(1)) or
             Input.GetKeyDown("c") then

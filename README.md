@@ -30,6 +30,13 @@ The game is designed for a 960×540 runtime target.
 For a suggested recording route, see `DEMO_GUIDE.md`. Art provenance and the
 final generation prompts are recorded in `ART_NOTES.md`.
 
+## Edit narrative content
+
+Edit `content/game_content.xlsx`, then double-click
+`Sync Game Content.command` before restarting Play in PocketEngine. The sync
+command validates the workbook and generates the Lua data used by the game.
+See `CONTENT_WORKFLOW.md` for the sheet structure and editing rules.
+
 ## Art
 
 The room background and Alex age-progression sheet were generated specifically
