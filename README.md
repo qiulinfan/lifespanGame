@@ -42,3 +42,10 @@ See `CONTENT_WORKFLOW.md` for the sheet structure and editing rules.
 The room background and Alex age-progression sheet were generated specifically
 for this project in a deliberately low-detail pixel-art style, then downscaled
 for the runtime. UI panels are drawn from a reusable one-pixel texture.
+
+## Music
+
+Five original, seamless 8-bit loops represent Alex's current emotional state:
+curious, supported, anxious, uncertain, and confident. `GameDirector` selects
+the loop from the current feedback style and Alex's confidence, independence,
+and stress. See `AUDIO_NOTES.md` for the mood rules and regeneration command.

@@ -7,14 +7,33 @@ GameDirector = {
     confidence = 55,
     independence = 50,
     stress = 30,
+    click_sound = "block_click.ogg",
+    click_channel = 1,
+    click_volume = 62,
+    music_volume = 46,
+    current_music = nil,
+    music_tracks = {
+        curious = "mind_curious",
+        supported = "mind_supported",
+        anxious = "mind_anxious",
+        uncertain = "mind_uncertain",
+        confident = "mind_confident"
+    },
 
     OnStart = function(self)
         Camera.SetPosition(0.0, 0.0)
         Camera.SetZoom(1.0)
-        self:ResetGame()
+        self:ResetGame(true)
+        self:PreloadAudio()
+        self:UpdateMusic()
     end,
 
-    ResetGame = function(self)
+    OnUpdate = function(self)
+        self:UpdateMusic()
+    end,
+
+    ResetGame = function(self, silent)
+        if silent ~= true then self:PlayClick() end
         self.screen = "title"
         self.chapter_index = 1
         self.moment_index = 1
@@ -28,16 +47,72 @@ GameDirector = {
         self.ending_key = "responsive"
     end,
 
+    PreloadAudio = function(self)
+        Audio.Preload(self.click_sound, false)
+        for _, track in pairs(self.music_tracks) do
+            Audio.Preload(track, true)
+        end
+    end,
+
+    PlayClick = function(self)
+        Audio.Play(self.click_channel, self.click_sound, false)
+        Audio.SetVolume(self.click_channel, self.click_volume)
+    end,
+
+    GetMusicMood = function(self)
+        if self.screen == "title" or self.screen == "myth" or
+            self.screen == "intro" then
+            return "curious"
+        end
+
+        if self.screen == "ending" or self.screen == "concepts" then
+            if self.ending_key == "fixer" then return "uncertain" end
+            if self.ending_key == "distant" then return "anxious" end
+            return "confident"
+        end
+
+        if self.screen == "feedback" and self.last_action ~= nil then
+            if self.last_action.style == "responsive" then return "supported" end
+            if self.last_action.style == "fixer" then return "uncertain" end
+            if self.last_action.style == "distant" then return "anxious" end
+        end
+
+        if self.stress >= 55 then return "anxious" end
+        if self.confidence <= 42 or self.independence <= 38 then
+            return "uncertain"
+        end
+        if self.confidence >= 68 and self.independence >= 65 then
+            return "confident"
+        end
+        return "curious"
+    end,
+
+    UpdateMusic = function(self)
+        local mood = self:GetMusicMood()
+        local track = self.music_tracks[mood]
+        if track == nil then return end
+
+        local stopped = Audio.IsPlaybackEnabled() and not Music.IsPlaying()
+        if track ~= self.current_music or stopped then
+            self.current_music = track
+            Music.Play(track, true)
+            Music.SetVolume(self.music_volume)
+        end
+    end,
+
     StartBeliefQuestion = function(self)
+        self:PlayClick()
         self.screen = "myth"
     end,
 
     SetBelief = function(self, belief)
+        self:PlayClick()
         self.belief = belief
         self.screen = "intro"
     end,
 
     BeginStory = function(self)
+        self:PlayClick()
         self.chapter_index = 1
         self.moment_index = 1
         self.progress = Shared.chapters[1].start_progress
@@ -45,6 +120,7 @@ GameDirector = {
     end,
 
     BeginChapter = function(self)
+        self:PlayClick()
         self.screen = "choice"
     end,
 
@@ -65,6 +141,7 @@ GameDirector = {
         local action = moment.actions[index]
         if action == nil then return end
 
+        self:PlayClick()
         self.progress = Shared.Clamp(self.progress + action.progress, 0, 100)
         self.confidence = Shared.Clamp(self.confidence + action.confidence, 0, 100)
         self.independence = Shared.Clamp(
@@ -76,6 +153,7 @@ GameDirector = {
     end,
 
     ContinueAfterFeedback = function(self)
+        self:PlayClick()
         local chapter = self:GetChapter()
         if self.moment_index < #chapter.moments then
             self.moment_index = self.moment_index + 1
@@ -86,6 +164,7 @@ GameDirector = {
     end,
 
     ContinueAfterSummary = function(self)
+        self:PlayClick()
         if self.chapter_index < #Shared.chapters then
             self.chapter_index = self.chapter_index + 1
             self.moment_index = 1
@@ -122,10 +201,12 @@ GameDirector = {
     end,
 
     OpenConcepts = function(self)
+        self:PlayClick()
         self.screen = "concepts"
     end,
 
     CloseConcepts = function(self)
+        self:PlayClick()
         self.screen = "ending"
     end
 }
