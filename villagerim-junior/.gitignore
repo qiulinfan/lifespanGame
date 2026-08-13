@@ -1,0 +1,4 @@
+.pocketengine/editor_private_state.json
+*.meta
+.DS_Store
+Thumbs.db

@@ -1,0 +1,8 @@
+{
+  "spritesheets": {
+    "images/alex_ages.png": {
+      "rows": 1,
+      "columns": 3
+    }
+  }
+}

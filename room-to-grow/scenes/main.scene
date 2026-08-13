@@ -1,0 +1,69 @@
+{
+    "actors": [
+        {
+            "uid": 1,
+            "name": "background",
+            "components": {
+                "SpriteRenderer": {
+                    "type": "SpriteRenderer",
+                    "sprite": "room",
+                    "pivot_x": 0.5,
+                    "pivot_y": 0.5,
+                    "scale_x": 2.0,
+                    "scale_y": 2.0,
+                    "sorting_order": -1000,
+                    "auto_sorting_order": false
+                },
+                "Transform": {
+                    "type": "Transform",
+                    "x": 0.0,
+                    "y": 0.0
+                }
+            }
+        },
+        {
+            "uid": 2,
+            "name": "alex",
+            "components": {
+                "AlexArt": {
+                    "type": "AlexArt"
+                },
+                "SpriteRenderer": {
+                    "type": "SpriteRenderer",
+                    "sprite": "alex_ages",
+                    "pivot_x": 0.5,
+                    "pivot_y": 0.5,
+                    "scale_x": 0.62,
+                    "scale_y": 0.62,
+                    "sprite_row": 1,
+                    "sprite_column": 1,
+                    "sorting_order": 20,
+                    "auto_sorting_order": false
+                },
+                "Transform": {
+                    "type": "Transform",
+                    "x": -2.950000047683716,
+                    "y": 0.550000011920929
+                }
+            }
+        },
+        {
+            "uid": 3,
+            "name": "director",
+            "components": {
+                "GameDirector": {
+                    "type": "GameDirector"
+                }
+            }
+        },
+        {
+            "uid": 4,
+            "name": "ui",
+            "components": {
+                "GameUI": {
+                    "type": "GameUI"
+                }
+            }
+        }
+    ]
+}
