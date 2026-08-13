@@ -1,51 +1,20 @@
-# Room to Grow
+# PocketEngine Samples
 
-An educational choice-driven game made with PocketEngine for PSY 206.
+Sample games built with [PocketEngine](https://github.com/qiulinfan/pocketEngine).
+Each folder is a standalone PocketEngine project and can be opened directly in
+the editor.
 
-## Myth addressed
+## Games
 
-> A good caregiver should prevent children from struggling whenever possible.
+| Game | Description |
+| --- | --- |
+| [Room to Grow](room-to-grow/) | An educational choice-driven game about caregiving, scaffolding, and growing independence. |
+| [Villagerim Junior](villagerim-junior/) | A small top-down defense adventure with staged encounters, weapons, and a village altar to protect. |
 
-The game contrasts maximum help, no help, and responsive scaffolding across
-three moments in one child's development: age 4, age 9, and age 15.
+## Run a sample
 
-## Controls
+1. Start the PocketEngine editor.
+2. Choose **File → Open Project...**.
+3. Select either `room-to-grow` or `villagerim-junior` from this repository.
+4. Press Play.
 
-- Mouse: select buttons and choices
-- `1`–`4`: select a response
-- `Enter` / `Space`: continue
-- `C`: open the concepts page at the ending
-- `R`: replay from the ending
-- `Q`: quit from the ending
-
-## Run
-
-1. Start PocketEngine's `pocket` editor from the engine root.
-2. Choose **File → Open Project...** and select this folder.
-3. Press Play in the editor, or run the standalone `game` runtime after this
-   project has been selected in the editor.
-
-The game is designed for a 960×540 runtime target.
-
-For a suggested recording route, see `DEMO_GUIDE.md`. Art provenance and the
-final generation prompts are recorded in `ART_NOTES.md`.
-
-## Edit narrative content
-
-Edit `content/game_content.xlsx`, then double-click
-`Sync Game Content.command` before restarting Play in PocketEngine. The sync
-command validates the workbook and generates the Lua data used by the game.
-See `CONTENT_WORKFLOW.md` for the sheet structure and editing rules.
-
-## Art
-
-The room background and Alex age-progression sheet were generated specifically
-for this project in a deliberately low-detail pixel-art style, then downscaled
-for the runtime. UI panels are drawn from a reusable one-pixel texture.
-
-## Music
-
-Five original, seamless 8-bit loops represent Alex's current emotional state:
-curious, supported, anxious, uncertain, and confident. `GameDirector` selects
-the loop from the current feedback style and Alex's confidence, independence,
-and stress. See `AUDIO_NOTES.md` for the mood rules and regeneration command.
